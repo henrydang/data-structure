@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class ArrayList<E> implements List<E> {
 
     private static final int CAPACITY = 16;
+    private static final int CAPACITY_INCREASE_FACTOR = 2;
     private E[] data;
     private int size = 0;
 
@@ -41,7 +42,7 @@ public class ArrayList<E> implements List<E> {
     public void add(int i, E e) throws IndexOutOfBoundsException, IllegalStateException {
         checkIndex(i, size);
         if (size == data.length) {
-            throw new IllegalStateException("Array is full");
+            resize(CAPACITY_INCREASE_FACTOR * data.length);
         }
         // shift element to the right
         for (int j = size; j > i; j--) {
@@ -70,9 +71,17 @@ public class ArrayList<E> implements List<E> {
     }
 
 
-    private void checkIndex(int i, int max) {
+    protected void checkIndex(int i, int max) {
         if (i < 0 || i > max) {
             throw new IndexOutOfBoundsException("Illegal index: " + i);
         }
+    }
+
+    protected void resize(int capacity) {
+       E[] temp = (E[]) new Object[capacity];
+       for (int i=0; i < size; i++) {
+           temp[i] = data[i];
+       }
+       data = temp;
     }
 }

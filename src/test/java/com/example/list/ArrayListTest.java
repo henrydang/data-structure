@@ -1,6 +1,7 @@
 package com.example.list;
 
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class ArrayListTest {
 
@@ -13,7 +14,7 @@ public class ArrayListTest {
         System.out.println(list);
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void shouldReturnExeceptionWhenListFull() {
         List<Integer> list = new ArrayList<>(3);
         list.add(0, 1);
@@ -31,4 +32,6 @@ public class ArrayListTest {
         list.add(2, 3);
         list.remove(4);
     }
+
+
 }
