@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import com.example.list.Position;
 
-public class AbstractBinaryTree<E> extends AbstractTree<E> implements BinaryTree<E> {
+public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements BinaryTree<E> {
 
     public Position<E> sibling(Position<E> p) {
         Position<E> parent = parent(p);
