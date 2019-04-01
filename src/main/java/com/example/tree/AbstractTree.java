@@ -1,6 +1,8 @@
 package com.example.tree;
 
 import com.example.list.Position;
+import com.example.queue.LinkedQueue;
+import com.example.queue.Queue;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,7 +50,21 @@ public abstract class AbstractTree<E> implements Tree<E> {
         return snapshot;
     }
 
-    // TODO breathfirst()
+    public Iterable<Position<E>> breathfirst() {
+        List<Position<E>> snapshot = new ArrayList<>();
+        if (!isEmpty()) {
+            Queue<Position<E>> queue = new LinkedQueue<>();
+            queue.enqueue(root());
+            while (!queue.isEmpty()) {
+                Position<E> p = queue.dequeue();
+                snapshot.add(p);
+                for (Position<E> child : children(p)) {
+                    queue.enqueue(child);
+                }
+            }
+        }
+        return snapshot;
+    }
 
 
     private void preorderSubtree(Position<E> p, List<Position<E>> snapshot) {
